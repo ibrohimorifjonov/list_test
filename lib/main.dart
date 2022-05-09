@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView.separated(
         shrinkWrap: true,
-        itemCount: 40,
+        itemCount: 200,
         padding: const EdgeInsets.symmetric(vertical: 16),
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "This is test text ${index+1}",
+                  "This is test text ${index + 1}",
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -57,17 +58,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: CachedNetworkImage(
-                    imageUrl: "https://picsum.photos/seed/picsum/200/300",
+                  child: FadeInImage.memoryNetwork(
+                    image: "https://picsum.photos/seed/picsum/200/300",
                     width: 200,
                     height: 100,
                     fit: BoxFit.cover,
+                    placeholder: kTransparentImage,
                   ),
                 )
               ],
             ),
           );
-        }, separatorBuilder: (BuildContext context, int index) =>const SizedBox(height: 12),
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(height: 12),
       ),
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
